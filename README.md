@@ -16,10 +16,11 @@ Creating a Dockerfile to containerize the application defining the necessary dep
 3. WORKDIR /usr/src/app
 4. RUN chown -R appuser:appuser /usr/src/app
 5. COPY package*.json .
-6. RUN npm ci --only=production 
-7. COPY . .
-8. EXPOSE 3000
-9. CMD ["node", "./app.js"]
+6. RUN npm ci --only=production
+7. USER appuser
+8. COPY . .
+9. EXPOSE 3000
+10. CMD ["node", "./app.js"]
 ```
 In this Dockerfile:
 
@@ -29,8 +30,10 @@ In this Dockerfile:
 4. Changes ownership of the contents of '/usr/src/app' directory to appuser prevents security vulnerabilities.
 5. Copies the package.json and package-lock.json files to the working directory.
 6. Installs dependencies defined in package.json.
-8. Exposes port 3000, which is the port the application listens on.
-9. Specifies the command to run the application when the container starts.
+7. Change to non-root user
+8. Copy application files to conatiner
+9. Exposes port 3000, which is the port the application listens on.
+10. Specifies the command to run the application when the container starts.
 
 ### Build and Push Docker Image to container registry
 - Docker login to the container registry
