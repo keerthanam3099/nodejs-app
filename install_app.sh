@@ -12,7 +12,7 @@ docker run -d -p 3000:3000 keerthy99/app:nodejs
 kubectl create ns nginx-ingress
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 helm repo update
-helm install my-ingress-nginx ingress-nginx/ingress-nginx --version 4.9.1 -n nginx-ingress --debug
+helm install ingress-nginx ingress-nginx/ingress-nginx --version 4.9.1 -n nginx-ingress --debug
 
 # Helm install application
 kubectl create ns app
