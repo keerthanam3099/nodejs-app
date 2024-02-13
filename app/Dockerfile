@@ -16,6 +16,9 @@ COPY package*.json .
 #install the packages 
 RUN npm ci --only=production 
 
+# user change
+USER appuser
+
 # Copy source code
 COPY . .
 
