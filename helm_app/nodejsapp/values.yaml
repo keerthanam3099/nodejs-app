@@ -1,0 +1,41 @@
+#replicaCount of the application
+replicaCount: 1
+
+#imageRepository (dockerhub/ECR) of application 
+#imagePullPolicy of image 
+#imageTag - desired version of the image deployed
+image:
+  repository: "keerthy99/app"
+  pullPolicy: Always
+  tag: "nodejsv1"
+
+#podLabels also used as slectors 
+podLabels:
+  app: nodejsapp
+
+#servicesType used to define type of k8s service
+#servicePort used to define listening port
+service:
+  type: ClusterIP
+  port: 3000
+
+#resourcesLimits used to set the max resource consumption for the application
+#resourcesrequests used to set the min resource consumption for the application
+resources: 
+  limits:
+    cpu: 300m
+    memory: 200Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+#livenessProbe to check if the application is healthy
+#readinessProbe to check if the application is ready to accept incoming traffic
+livenessProbe:
+  httpGet:
+    path: /
+    port: http
+readinessProbe:
+  httpGet:
+    path: /
+    port: http
